@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore Website Page</title>
+
+    <link rel="stylesheet" th:href="@{~/css/details-page-style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo"> <i class="fas fa-book"></i> Bookstore </a>
+
+            <form action="" class="search-form">
+                <input type="search" name="" placeholder="Search for specific book.." id="search-box">
+                <label for="search-box" class="fa fa-search"></label>
+            </form>
+            <div class="icons">
+                <div id="search-btn" class="fas fa-search"></div>
+                <a href="#" class="fas fa-shopping-cart"></a>
+                <div id="login-btn" class="fas fa-user"></div>
+            </div>
+        </div>
+        <div class="header-navbar">
+            <nav class="navbar-items">
+                <a href="#">Home</a>
+                <a href="#recommended">Recommended books</a>
+                <a href="#home">Reviews</a>
+                <a href="#home">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="product-section">
+        <h1 class="heading">
+            <span>Book details</span>
+        </h1>
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="book-img">
+                    <img th:src="@{'~/img/'+${book.id}+'.jpg'}" alt="" srcset="">
+                </div>
+                <div class="book-content">
+                    <h2 class="book-title" th:text="${book.bookTitle}"></h2>
+                    <div class="book-author"> by <span th:text="${book.bookAuthor}"></span></div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.0 (33)</span>
+                     </div>
+                     <div class="book-price">
+                        <p class="availability">Availability: <span>in stock</span></p>
+                        <p class="actual-price">Price: <span th:text="${#numbers.formatDecimal(book.price, 0, 'COMMA', 2, 'POINT')}+' zł'"></span></p>
+                     </div>
+                    
+                     <div class="book-detail" th:each="publisher:${book.publisher}">
+                        <h2>Overview</h2>
+                        <p th:text="${book.description}"></p>
+                        <ul>
+                            <li>ISBN: <span th:text="${book.ISBN}"></span></li>
+                            <li>Book category: <span th:text="${book.bookCategory}"></span> </li>
+                            <li>Publisher: <span th:text="${publisher.publisherName}"></span> </li>
+                            <li>Publication date: <span th:text="${publisher.publishDate}"></span> </li>
+                            <li>Book type: <span th:text="${publisher.bookType}"></span> </li>
+                            <li>Pages: <span th:text="${publisher.pages}"></span> </li>
+                            <li>Book language: <span th:text="${publisher.bookLanguage}"></span> </li>
+                        </ul>
+                    </div>
+                    <div class="purchase-section">
+                        <input type="number" min="1" value="1">
+                        <button type="button" class="btn">Add to cart <i class="fas fa-shopping-cart"></i></button>
+                        <button type="button" class="btn">Add to favourites <i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-section">
+        <h1 class="heading">
+            <span>Read users reviews or write own</span>
+        </h1>
+
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="book-img">
+                    <img src="../img/london_rules.jpg" alt="" srcset="">
+                </div>
+                <div class="book-content">
+                    <h2 class="book-title">Everyone in My Family Has Killed Someone: A Novel</h2>
+                    <div class="book-author"> by <span>Benjamin Stevenson</span></div>
+                    <div class="book-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>4.0 (33)</span>
+                     </div>
+                     <div class="book-price">
+                        <p class="availability">Availability: <span>in stock</span></p>
+                        <p class="actual-price">Price: <span>$29.90</span></p>
+                     </div>
+                    
+                     <div class="book-detail">
+                        <h2>Overview</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque blanditiis quod dolores. Culpa asperiores rerum dolor ut in at magnam sapiente pariatur beatae esse dolorem animi, delectus est. Nobis, ipsum.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, voluptates?</p>
+                        <ul>
+                            <li><span>ISBN:</span> 9780316568920</li>
+                            <li><span>Publisher:</span> Little, Brown and Company</li>
+                            <li><span>Publication date:</span> 10/03/2023</li>
+                            <li><span>Edition description:</span> B&N Exclusive Edition</li>
+                            <li><span>Pages:</span> 384</li>
+                            <li><span>Sales rank:</span> 2</li>
+                            <li><span>Product dimensions:</span> 6.50(w) x 1.50(h) x 9.50(d)</li>
+                        </ul>
+                    </div>
+                    <div class="purchase-section">
+                        <input type="number" min="1" value="1">
+                        <button type="button" class="btn">Add to cart <i class="fas fa-shopping-cart"></i></button>
+                        <button type="button" class="btn">Add to favourites <i class="fas fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script type="module" src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</body>
+
+</html>
