@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root {
+    --green: #27ae60;
+    --dark-color: #219150;
+    --black: #444;
+    --light-color: #666;
+    --border: .1rem solid rgb(0, 0, 0, .1);
+    --border-hover: .1rem solid var(--black);
+    --box-shadow: 0 .5rem 1rem rgb(0, 0, 0, .1);
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
+    transition: width none;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-padding-top: 5rem;
+    scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+    width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+html::-webkit-scrollbar-thumb {
+    background: var(--black);
+}
+
+.header .header-content {
+    background: #fff;
+    padding: 1.5rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.header .header-content .logo {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: var(--black);
+}
+
+.header .header-content .logo i {
+    color: var(--green);
+}
+
+.header .header-content .search-form {
+    width: 50rem;
+    height: 5rem;
+    border: var(--border);
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+}
+
+.header .header-content .search-form input {
+    font-size: 1.6rem;
+    padding: 0 1.2rem;
+    height: 100%;
+    width: 100%;
+    text-transform: none;
+    color: var(--black);
+}
+
+.header .header-content .search-form label {
+    font-size: 2.5rem;
+    padding-right: 1.5rem;
+    color: var(--black);
+    cursor: pointer;
+}
+
+.header .header-content .search-form label:hover {
+    color: var(--green);
+}
+
+.header .header-content .icons div,
+.header .header-content .icons a {
+    font-size: 2.5rem;
+    margin-left: 1.5rem;
+    color: var(--black);
+    cursor: pointer;
+}
+
+.header .header-content .icons div:hover,
+.header .header-content .icons a:hover {
+    color: var(--green);
+}
+
+#search-btn {
+    display: none;
+}
+
+.header .header-navbar {
+    background: var(--green);
+}
+
+.header .header-navbar .navbar-items {
+    text-align: center;
+}
+
+.header .header-navbar .navbar-items a {
+    color: #fff;
+    display: inline-block;
+    padding: 1.2rem;
+    font-size: 1.7rem;
+}
+
+.header .header-navbar .navbar-items a:hover {
+    background: var(--dark-color);
+}
+
+.header .header-navbar.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+section {
+    padding: 5rem 9%;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.heading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: .01rem;
+    background: rgb(0, 0, 0, .1);
+    z-index: -1;
+}
+
+.heading span {
+    font-size: 3rem;
+    padding: .5rem 2rem;
+    color: var(--black);
+    background: #fff;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+}
+
+.card-wrapper {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.book-img {
+    display: flex;
+    justify-content: center;
+}
+
+.book-img {
+    max-height: 50rem;
+    max-width: 50rem;
+}
+
+.book-img img:hover {
+    opacity: .85;
+}
+
+.book-content {
+    padding: 1rem 1rem;
+}
+
+.book-title {
+    font-size: 2.5rem;
+    text-transform: capitalize;
+    font-weight: 500;
+    position: relative;
+    margin: 1rem 0;
+}
+
+.book-author {
+    font-weight: 400;
+    font-size: 1.5rem;
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.book-author span {
+    color: var(--dark-color);
+}
+
+.book-rating {
+    color: #ffc107;
+    font-size: 1.3rem;
+}
+
+.book-rating span {
+    margin-left: 2rem;
+    font-weight: 400;
+    color: #000;
+}
+
+.book-price {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding-bottom: 1.5rem;
+    border-bottom: var(--border);
+}
+
+.book-price span {
+    font-weight: 400;
+    color: var(--dark-color);
+}
+
+.book-detail h2 {
+    font-size: 1.5rem;
+    padding-bottom: .6rem;
+}
+
+.book-detail p {
+    font-size: 1.2rem;
+    padding: .3rem;
+    opacity: .8;
+}
+
+.book-detail ul {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    list-style: none;
+}
+
+ul li::before {
+    content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+    color: var(--dark-color); /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+
+.book-detail ul li {
+    margin-left: 2rem;
+    font-weight: bolder;
+    color: #000;
+}
+
+.book-detail ul li span {
+    font-weight: 400;
+    color: #000;
+}
+
+.purchase-section {
+    margin: 1.5rem 0;
+}
+
+.purchase-section input,
+.purchase-section .btn {
+    border: 1.5px solid #ddd;
+    text-align: center;
+    outline: 0;
+    margin-right: .2rem;
+    margin-bottom: 1rem;
+}
+
+.purchase-section input {
+    width: 50px;
+    padding: .4rem 1rem;
+}
+
+.purchase-section .btn {
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    padding: 1rem .8rem;
+}
+
+.purchase-section .btn:first-of-type {
+    background: #256eff;
+}
+
+.purchase-section .btn:last-of-type {
+    background: #f64749;
+}
+
+.purchase-section .btn:hover {
+    opacity: .9;
+}
+
+
