@@ -30,5 +30,17 @@ CREATE TABLE IF NOT EXISTS books
 
     CONSTRAINT fk_book_stock FOREIGN KEY (stock_id) REFERENCES stocks (stock_id),
     CONSTRAINT fk_book_publisher FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id)
+--     CONSTRAINT fk_book_review FOREIGN KEY (book_id) REFERENCES reviews (review_book_id)
 
-    );
+);
+
+CREATE TABLE IF NOT EXISTS reviews
+(
+    review_id serial PRIMARY KEY,
+    review_book_id int,
+    rating int,
+    review_content varchar,
+    review_email varchar,
+    review_login varchar,
+    CONSTRAINT fk_review_book FOREIGN KEY (review_book_id) REFERENCES books (book_id)
+);

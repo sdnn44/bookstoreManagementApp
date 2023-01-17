@@ -96,8 +96,8 @@
                 <div class="book-img">
                     <img src="../img/london_rules.jpg" alt="" srcset="">
                 </div>
-                <div class="book-content">
-                    <h2 class="book-title">Everyone in My Family Has Killed Someone: A Novel</h2>
+                <div class="book-content" th:each="review:${reviews}">
+                    <h2 class="book-title" th:text="${review.rating}"></h2>
                     <div class="book-author"> by <span>Benjamin Stevenson</span></div>
                     <div class="book-rating">
                         <i class="fas fa-star"></i>

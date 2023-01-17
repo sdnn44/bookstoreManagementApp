@@ -1,7 +1,9 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.model.Book;
+import com.example.bookstore.model.Review;
 import com.example.bookstore.service.BookService;
+import com.example.bookstore.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 public class MainController {
     private final BookService bookService;
+    private final ReviewService reviewService;
 
     @GetMapping
     public String getMainPage(Model model) {
@@ -28,7 +31,9 @@ public class MainController {
     @GetMapping("/book-details")
     public String getBookDetailsPage(@RequestParam Integer bookId, Model model) {
         Book specificBook = bookService.getBookById(bookId).orElse(null);
+        List<Review> allReviewsForSpecificBook = reviewService.getAllReviewsByBookName(specificBook.getBookTitle());
         model.addAttribute("book", specificBook);
+        model.addAttribute("reviews", allReviewsForSpecificBook);
 
         return "book-details-page.html";
     }

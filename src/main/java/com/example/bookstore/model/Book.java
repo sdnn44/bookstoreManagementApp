@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.math.BigInteger;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Getter
@@ -23,6 +25,7 @@ public class Book {
     private final String bookCategory;
     private final BigInteger ISBN;
     private final String description;
+    private final List<Review> reviews;
 
 
     public static Book fromEntity(BookEntity bookEntity) {
@@ -35,7 +38,8 @@ public class Book {
                 bookEntity.getPrice(),
                 bookEntity.getBookCategory(),
                 bookEntity.getBookIsbn(),
-                bookEntity.getBookDescription()
+                bookEntity.getBookDescription(),
+                bookEntity.getReviews().stream().map(Review::fromEntity).collect(Collectors.toList())
         );
     }
 }

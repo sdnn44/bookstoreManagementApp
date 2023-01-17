@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.List;
 
 @Entity
 @Table(name = "books", schema = "public")
@@ -50,7 +51,11 @@ public class BookEntity {
     @Column(name = "book_description")
     private String bookDescription;
 
-    public BookEntity(StockEntity stock, PublisherEntity publisher, String bookTitle, String bookAuthor, float price, String bookCategory, BigInteger bookIsbn, String bookDescription) {
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "review_book_id")
+    private List<ReviewEntity> reviews;
+
+    public BookEntity(StockEntity stock, PublisherEntity publisher, String bookTitle, String bookAuthor, float price, String bookCategory, BigInteger bookIsbn, String bookDescription, List<ReviewEntity> reviews) {
         this.stock = stock;
         this.publisher = publisher;
         this.bookTitle = bookTitle;
@@ -59,5 +64,6 @@ public class BookEntity {
         this.bookCategory = bookCategory;
         this.bookIsbn = bookIsbn;
         this.bookDescription = bookDescription;
+        this.reviews = reviews;
     }
 }
