@@ -48,3 +48,29 @@ var swiper = new Swiper(".recommended-slider", {
   },
   
 });
+
+var swiperReviews = new Swiper(".review-slider", {
+  grabCursor: true,
+  loop: false,
+  centeredSlides: true,
+  spaceBetween: 20,
+  autoplay: {
+    delay: 2500,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  breakpoints: {
+    0: {
+      slidesPerView: 1,
+    },
+    1024: {
+      slidesPerView: 1,
+    },
+    1200: {
+      slidesPerView: 1,
+    },
+  },
+});
