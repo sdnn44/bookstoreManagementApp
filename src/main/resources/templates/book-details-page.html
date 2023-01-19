@@ -52,8 +52,8 @@
                     <h2 class="book-title" th:text="${book.bookTitle}"></h2>
                     <div class="book-author"> by <span th:text="${book.bookAuthor}"></span></div>
                     <div class="book-rating">
-                        <i class="fas fa-star"></i>
-                        <span>4.0</span> <span th:text="'('+${reviews.size()}+')'"></span>
+                        <i class="fas fa-star"th:each="i:${#numbers.sequence(1,__${rating}__)}"></i>
+                        <span th:text="${rating}"></span> <span th:text="'('+${reviews.size()}+')'"></span>
                      </div>
                      <div class="book-price">
                         <p class="availability">Availability: <span>in stock</span></p>
@@ -121,28 +121,30 @@
                         <img src="../img/books.png" alt="" />
                         <img src="../img/stand.png" alt="" />
                     </div>
-                    <form action="#" method="POST" id="review-form">
+                    <form th:action="@{/add-reviews}" method="POST" th:object="${review}" id="review-form">
                         <div class="inputBox">
-                            <input type="text" name="username" id="username_input" placeholder="Nazwa użytkownika" maxlength="15" required />
-                            <input type="email" name="email" id="email_input" placeholder="E-mail" required />
+                            <input type="text" name="username" id="username_input" th:field="*{login}" placeholder="Nazwa użytkownika" maxlength="15" required />
+                            <input type="email" name="email" id="email_input" th:field="*{email}" placeholder="E-mail" required />
+                            <input type="number" name="bookReviewId" id="bookReviewId" th:value="${book.id}"/>
+<!--                            <input type="number" name="number" id="dummy_input" th:field="*{id}"  th:text="${reviews.size()+1}" placeholder="dummy_input"/>-->
                         </div>
                         <div class="inputBox">
                             <div class="container-rating">
                                 <div class="star-widget">
-                                    <input type="radio" name="rating" id="rate-5" value="5" />
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-5" value="5" />
                                     <label for="rate-5" class="fas fa-star"></label>
-                                    <input type="radio" name="rating" id="rate-4" value="4" />
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-4" value="4" />
                                     <label for="rate-4" class="fas fa-star"></label>
-                                    <input type="radio" name="rating" id="rate-3" value="3" />
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-3" value="3" />
                                     <label for="rate-3" class="fas fa-star"></label>
-                                    <input type="radio" name="rating" id="rate-2" value="2" />
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-2" value="2" />
                                     <label for="rate-2" class="fas fa-star"></label>
-                                    <input type="radio" name="rating" id="rate-1" value="1" checked />
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-1" value="1" checked />
                                     <label for="rate-1" class="fas fa-star"></label>
                                 </div>
                             </div>
                         </div>
-                        <textarea maxlength="90" placeholder="Wyraź swoją opinię na temat książki" name="content" id="content_input" cols="10" rows="2" required></textarea>
+                        <textarea maxlength="90" th:field="*{content}" placeholder="Wyraź swoją opinię na temat książki" name="content" id="content_input" cols="10" rows="2" required></textarea>
                         <input type="submit" value="Opublikuj" class="show-menu" id="submit_input" />
                     </form>
                 </div>

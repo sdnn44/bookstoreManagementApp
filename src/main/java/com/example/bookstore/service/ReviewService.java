@@ -24,4 +24,22 @@ public class ReviewService {
     public List<Review> getAllReviewsByBookName(String bookName) {
         return reviewRepository.getAllReviewsByBookName(bookName);
     }
+
+    public double calculateAverageBookRating(String bookName) {
+        List<Review> reviewsForBookName = getAllReviewsByBookName(bookName);
+        if (reviewsForBookName.isEmpty())
+            return 0d;
+
+        double rating = reviewsForBookName.stream().map(Review::getRating).reduce(0, Integer::sum);
+        return rating / reviewsForBookName.size();
+    }
+
+    public boolean addReview(Review review) {
+        // validation
+        return reviewRepository.save(review);
+    }
+//    public boolean addReview(int id, int bookId, Integer rating, String content, String email, String login) {
+//        // validation
+//        return reviewRepository.addReview(new Review(id, bookId, rating, content, email, login));
+//    }
 }

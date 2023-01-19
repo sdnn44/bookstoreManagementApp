@@ -44,6 +44,6 @@ public class ReviewEntity {
     }
 
     public static ReviewEntity fromReview(Review review) {
-        return new ReviewEntity(review.getId(), review.getBookReviewId(), review.getRating(), review.getContent(), review.getEmail(), review.getLogin());
+        return new ReviewEntity(review.getBookReviewId(), review.getRating(), review.getContent(), review.getEmail(), review.getLogin());
     }
 }
