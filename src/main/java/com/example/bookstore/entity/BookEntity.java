@@ -45,7 +45,7 @@ public class BookEntity {
     private String bookDescription;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "review_book_id")
+    @JoinColumn(name = "book_id")
     private List<ReviewEntity> reviews;
 
     public BookEntity(StockEntity stock, PublisherEntity publisher, String bookTitle, String bookAuthor, BigDecimal price, String bookCategory, String bookIsbn, String bookDescription, List<ReviewEntity> reviews) {

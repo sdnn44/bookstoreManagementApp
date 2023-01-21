@@ -24,14 +24,6 @@ public class MainController {
         return "main-page.html";
     }
 
-    @GetMapping("/book-details/{bookId}")
-    public String getBookDetailsPage(@PathVariable int bookId, Model model) {
-        Book specificBook = bookService.getBookById((long) bookId).orElse(null);
-        model.addAttribute("book", specificBook);
-
-        return "book-details-page.html";
-    }
-
     @GetMapping("/login")
     public String login() {
         return "login.html";

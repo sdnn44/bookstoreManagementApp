@@ -1,8 +1,10 @@
 package com.example.bookstore.service;
 
+import com.example.bookstore.entity.BookEntity;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,10 @@ public class BookService {
     }
 
     public Optional<Book> getBookById(Long id) {
-        return bookRepository.findById(id).map(Book::fromEntity);
+        return getBookEntityById(id).map(Book::fromEntity);
+    }
+
+    public Optional<BookEntity> getBookEntityById(Long id) {
+        return bookRepository.findById(id);
     }
 }

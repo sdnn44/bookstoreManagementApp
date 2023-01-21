@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -15,7 +17,6 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    @Getter(AccessLevel.NONE)
     private Long id;
 
     @Column(name = "USERNAME")
@@ -27,4 +28,12 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "ROLE_ID")
     private RoleEntity role;
+
+    @ManyToMany
+    @JoinTable(
+            name = "FAVOURITE_BOOKS",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<BookEntity> favouriteBooks = new ArrayList<>();
 }

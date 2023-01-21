@@ -4,6 +4,7 @@ drop table if exists books cascade;
 drop table if exists ROLES cascade;
 drop table if exists USERS cascade;
 drop table if exists reviews cascade;
+drop table if exists FAVOURITE cascade;
 
 CREATE TABLE IF NOT EXISTS stocks
 (
@@ -43,12 +44,12 @@ CREATE TABLE IF NOT EXISTS books
 CREATE TABLE IF NOT EXISTS reviews
 (
     review_id serial PRIMARY KEY,
-    review_book_id int,
+    book_id int,
     rating int,
     review_content varchar,
     review_email varchar,
     review_login varchar,
-    CONSTRAINT fk_review_book FOREIGN KEY (review_book_id) REFERENCES books (book_id)
+    CONSTRAINT fk_review_book FOREIGN KEY (book_id) REFERENCES books (book_id)
 );
 create table if not exists ROLES
 (
@@ -62,4 +63,11 @@ create table if not exists USERS(
     PASSWORD varchar not null,
     ROLE_ID integer,
     constraint roles_fk foreign key (ROLE_ID) references ROLES(ID)
+);
+
+create table if not exists FAVOURITE_BOOKS(
+    user_id serial,
+    book_id serial,
+    constraint user_id_fav_fk foreign key(user_id) references USERS(ID),
+    constraint book_id_fav_fk foreign key(book_id) references books(book_id)
 );

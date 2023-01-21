@@ -3,8 +3,6 @@ package com.example.bookstore.model;
 import com.example.bookstore.entity.ReviewEntity;
 import lombok.*;
 
-import java.util.List;
-
 //@RequiredArgsConstructor
 @Getter
 @AllArgsConstructor
@@ -15,20 +13,15 @@ import java.util.List;
 
 public class Review {
 
-    private int id;
-    private int bookReviewId;
+    private Long id;
+    private Long bookId;
     private Integer rating;
     private String content;
     private String email;
     private String login;
 
-    public Review(int bookReviewId) {
-//        this.id = id;
-        this.bookReviewId = bookReviewId;
-    }
-
-    public Review(int bookReviewId, Integer rating, String content, String email, String login) {
-        this.bookReviewId = bookReviewId;
+    public Review(Long bookId, Integer rating, String content, String email, String login) {
+        this.bookId = bookId;
         this.rating = rating;
         this.content = content;
         this.email = email;
@@ -38,12 +31,15 @@ public class Review {
     public static Review fromEntity(ReviewEntity reviewEntity) {
         return new Review(
 //                reviewEntity.getId(),
-                reviewEntity.getBookReviewId(),
+                reviewEntity.getBookId(),
                 reviewEntity.getRating(),
                 reviewEntity.getContent(),
                 reviewEntity.getEmail(),
                 reviewEntity.getLogin()
         );
+    }
 
+    public ReviewEntity toEntity(Review review) {
+        return new ReviewEntity(review);
     }
 }
