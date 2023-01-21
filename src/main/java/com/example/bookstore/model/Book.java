@@ -1,29 +1,28 @@
 package com.example.bookstore.model;
 
 import com.example.bookstore.entity.BookEntity;
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
-@RequiredArgsConstructor
 @Getter
-@EqualsAndHashCode
 @ToString
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
-    private final int id;
-    private final Stock stock;
-    private final Publisher publisher;
-    private final String bookTitle;
-    private final String bookAuthor;
-    private final float price;
-    private final String bookCategory;
-    private final BigInteger ISBN;
-    private final String description;
 
+    private Long id;
+    private Stock stock;
+    private Publisher publisher;
+    private String bookTitle;
+    private String bookAuthor;
+    private BigDecimal price;
+    private String bookCategory;
+    private String ISBN;
+    private String description;
 
     public static Book fromEntity(BookEntity bookEntity) {
         return new Book(

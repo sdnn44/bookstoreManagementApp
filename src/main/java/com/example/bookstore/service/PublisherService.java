@@ -7,17 +7,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PublisherService {
+
     private final PublisherRepository publisherRepository;
 
     public List<Publisher> getAllPublishers() {
-        return publisherRepository.getAllPublishers();
+        return publisherRepository.findAll()
+                .stream()
+                .map(Publisher::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Publisher> getPublisherById(int id) {
-        return publisherRepository.getPublisherById(id);
+    public Optional<Publisher> getPublisherById(Long id) {
+        return publisherRepository.findById(id).map(Publisher::fromEntity);
     }
 }

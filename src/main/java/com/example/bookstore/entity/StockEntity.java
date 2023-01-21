@@ -1,24 +1,20 @@
 package com.example.bookstore.entity;
 
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "stocks", schema = "public")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-
 public class StockEntity {
     @Id
     @Column(name = "stock_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "quantity")
     private Integer quantity;
