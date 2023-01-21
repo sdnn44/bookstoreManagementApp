@@ -1,3 +1,10 @@
+drop table if exists stocks cascade;
+drop table if exists publishers cascade;
+drop table if exists books cascade;
+drop table if exists ROLES cascade;
+drop table if exists USERS cascade;
+drop table if exists reviews cascade;
+
 CREATE TABLE IF NOT EXISTS stocks
 (
     stock_id            serial PRIMARY KEY,
@@ -18,19 +25,18 @@ CREATE TABLE IF NOT EXISTS publishers
 
 CREATE TABLE IF NOT EXISTS books
 (
-    book_id    serial PRIMARY KEY ,
+    book_id    serial PRIMARY KEY,
     stock_id     int,
     publisher_id int,
     book_title        varchar,
     book_author         varchar,
-    book_price       float,
+    book_price       numeric,
     book_category         varchar,
-    book_isbn        bigint,
+    book_isbn        varchar,
     book_description          varchar,
 
     CONSTRAINT fk_book_stock FOREIGN KEY (stock_id) REFERENCES stocks (stock_id),
     CONSTRAINT fk_book_publisher FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id)
---     CONSTRAINT fk_book_review FOREIGN KEY (book_id) REFERENCES reviews (review_book_id)
 
 );
 
@@ -43,4 +49,17 @@ CREATE TABLE IF NOT EXISTS reviews
     review_email varchar,
     review_login varchar,
     CONSTRAINT fk_review_book FOREIGN KEY (review_book_id) REFERENCES books (book_id)
+);
+create table if not exists ROLES
+(
+    ID serial primary key,
+    ROLE_NAME varchar
+);
+
+create table if not exists USERS(
+    ID serial primary key,
+    USERNAME varchar,
+    PASSWORD varchar not null,
+    ROLE_ID integer,
+    constraint roles_fk foreign key (ROLE_ID) references ROLES(ID)
 );

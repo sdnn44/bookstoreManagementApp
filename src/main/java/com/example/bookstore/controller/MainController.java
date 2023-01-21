@@ -1,23 +1,19 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.model.Book;
-import com.example.bookstore.model.Review;
 import com.example.bookstore.service.BookService;
-import com.example.bookstore.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-
 public class MainController {
+
     private final BookService bookService;
 
     @GetMapping
@@ -28,9 +24,16 @@ public class MainController {
         return "main-page.html";
     }
 
-    @GetMapping("/login-page")
-    public String getLoginPage(Model model) {
+    @GetMapping("/book-details/{bookId}")
+    public String getBookDetailsPage(@PathVariable int bookId, Model model) {
+        Book specificBook = bookService.getBookById((long) bookId).orElse(null);
+        model.addAttribute("book", specificBook);
 
-        return "login-page.html";
+        return "book-details-page.html";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login.html";
     }
 }

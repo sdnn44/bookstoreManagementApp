@@ -7,34 +7,13 @@
     <title>Online Bookstore Website Page</title>
 
     <link rel="stylesheet" th:href="@{~/css/main-page-style.css}">
+    <link rel="stylesheet" th:href="@{~/css/details-page-style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <a href="#" class="logo"> <i class="fas fa-book"></i> Bookstore </a>
-
-            <form action="" class="search-form">
-                <input type="search" name="" placeholder="Search for specific book.." id="search-box">
-                <label for="search-box" class="fa fa-search"></label>
-            </form>
-            <div class="icons">
-                <div id="search-btn" class="fas fa-search"></div>
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <a th:href="@{'/login-page'}" id="login-btn" class="fas fa-user"></a>
-            </div>
-        </div>
-        <div class="header-navbar">
-            <nav class="navbar">
-                <a href="#">Home</a>
-                <a href="#recommended">Recommended books</a>
-                <a href="#home">Reviews</a>
-                <a href="#home">Login</a>
-            </nav>
-        </div>
-    </header>
+    <header th:insert="/fragment/header.html :: header"></header>
 
     <section class="recommended" id="recommended">
         <h1 class="heading">
@@ -45,7 +24,7 @@
                 <!-- 1 -->
                 <div th:each="book:${books}" class="swiper-slide box">
                     <div class="icons">
-                        <a th:href="@{'/book-details?bookId='+${book.id}}" class="fas fa-eye"></a>
+                        <a th:href="@{'/book-details/'+${book.id}}" class="fas fa-eye"></a>
                         <a href="#" class="fas fa-heart"></a>
                     </div>
                     <div class="image">

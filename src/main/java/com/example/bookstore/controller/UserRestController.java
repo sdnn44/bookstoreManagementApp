@@ -1,7 +1,7 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.model.Publisher;
-import com.example.bookstore.service.PublisherService;
+import com.example.bookstore.entity.UserEntity;
+import com.example.bookstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class PublisherRestController {
+public class UserRestController {
 
-    private final PublisherService publisherService;
+    private final UserService userService;
 
-    @GetMapping("/publishers")
-    public ResponseEntity<List<Publisher>> getAllPublishers() {
-        return new ResponseEntity<>(publisherService.getAllPublishers(), HttpStatus.OK);
+    @GetMapping("/users")
+    public ResponseEntity<List<UserEntity>> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 }

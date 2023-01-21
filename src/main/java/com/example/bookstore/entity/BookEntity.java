@@ -1,29 +1,22 @@
 package com.example.bookstore.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @Table(name = "books", schema = "public")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-
 public class BookEntity {
-
-    @PersistenceContext
-    private static EntityManager entityManager;
 
     @Id
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stock_id")
@@ -40,13 +33,13 @@ public class BookEntity {
     private String bookAuthor;
 
     @Column(name = "book_price")
-    private float price;
+    private BigDecimal price;
 
     @Column(name = "book_category")
     private String bookCategory;
 
     @Column(name = "book_isbn")
-    private BigInteger bookIsbn;
+    private String bookIsbn;
 
     @Column(name = "book_description")
     private String bookDescription;
@@ -55,7 +48,7 @@ public class BookEntity {
     @JoinColumn(name = "review_book_id")
     private List<ReviewEntity> reviews;
 
-    public BookEntity(StockEntity stock, PublisherEntity publisher, String bookTitle, String bookAuthor, float price, String bookCategory, BigInteger bookIsbn, String bookDescription, List<ReviewEntity> reviews) {
+    public BookEntity(StockEntity stock, PublisherEntity publisher, String bookTitle, String bookAuthor, BigDecimal price, String bookCategory, String bookIsbn, String bookDescription, List<ReviewEntity> reviews) {
         this.stock = stock;
         this.publisher = publisher;
         this.bookTitle = bookTitle;

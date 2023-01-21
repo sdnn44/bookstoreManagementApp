@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class BookRestController {
+
     private final BookService bookService;
 
     @GetMapping("/books")
@@ -25,6 +26,6 @@ public class BookRestController {
 
     @GetMapping("/books/{bookId}")
     public ResponseEntity<Book> getBookById(@PathVariable int bookId) {
-        return bookService.getBookById(bookId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return bookService.getBookById((long) bookId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
