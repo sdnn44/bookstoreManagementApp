@@ -1,0 +1,27 @@
+<header class="header" th:fragment="header"
+        xmlns:th="http://www.w3.org/1999/xhtml"
+        xmlns:sec="http://www.thymeleaf.org">
+
+    <div class="header-content">
+        <a href="/" class="logo"> <i class="fas fa-book"></i> Bookstore </a>
+        <h4 sec:authentication="name"></h4>
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="Search for specific book.." id="search-box">
+            <label for="search-box" class="fa fa-search"></label>
+        </form>
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="#" class="fas fa-shopping-cart"></a>
+            <div id="btn" class="fas fa-user"></div>
+        </div>
+    </div>
+    <div class="header-navbar">
+        <nav class="navbar-items">
+            <a href="/">Home</a>
+            <a href="/#recommended">Recommended books</a>
+            <a href="/books/favourites">Favourites</a>
+            <a href="/login" sec:authorize="isAnonymous()">Login</a>
+            <a href="/logout" sec:authorize="isAuthenticated()">Logout</a>
+        </nav>
+    </div>
+</header>

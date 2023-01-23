@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
 
 
 <head>
@@ -15,29 +16,7 @@
 
 <body>
 
-    <header class="header">
-        <div class="header-content">
-            <a href="#" class="logo"> <i class="fas fa-book"></i> Bookstore </a>
-
-            <form action="" class="search-form">
-                <input type="search" name="" placeholder="Search for specific book.." id="search-box">
-                <label for="search-box" class="fa fa-search"></label>
-            </form>
-            <div class="icons">
-                <div id="search-btn" class="fas fa-search"></div>
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <div id="login-btn" class="fas fa-user"></div>
-            </div>
-        </div>
-        <div class="header-navbar">
-            <nav class="navbar-items">
-                <a href="#">Home</a>
-                <a href="#recommended">Recommended books</a>
-                <a href="#home">Reviews</a>
-                <a href="#home">Login</a>
-            </nav>
-        </div>
-    </header>
+    <header class="" th:insert="/fragment/header.html :: header"></header>
 
     <section id="product-section">
         <h1 class="heading">
@@ -52,17 +31,14 @@
                     <h2 class="book-title" th:text="${book.bookTitle}"></h2>
                     <div class="book-author"> by <span th:text="${book.bookAuthor}"></span></div>
                     <div class="book-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>4.0 (33)</span>
+                        <i class="fas fa-star"th:each="i:${#numbers.sequence(1,__${rating}__)}"></i>
+                        <span th:text="${rating}"></span> <span th:text="'('+${reviews.size()}+')'"></span>
                      </div>
                      <div class="book-price">
                         <p class="availability">Availability: <span>in stock</span></p>
                         <p class="actual-price">Price: <span th:text="${#numbers.formatDecimal(book.price, 0, 'COMMA', 2, 'POINT')}+' zł'"></span></p>
                      </div>
-                    
+
                      <div class="book-detail" th:each="publisher:${book.publisher}">
                         <h2>Overview</h2>
                         <p th:text="${book.description}"></p>
@@ -86,54 +62,67 @@
         </div>
     </section>
 
-    <section id="product-section">
-        <h1 class="heading">
-            <span>Read users reviews or write own</span>
-        </h1>
-
-        <div class="card-wrapper">
-            <div class="card">
-                <div class="book-img">
-                    <img src="../img/london_rules.jpg" alt="" srcset="">
+    <section class="review" id="review">
+        <div class="container">
+            <div class="row">
+                <div class="section-title">
+                    <h1 class="heading-review">
+                        <span>Book reviews</span>
+                        <p>Express your opinion about the book</p>
+                    </h1>
                 </div>
-                <div class="book-content">
-                    <h2 class="book-title">Everyone in My Family Has Killed Someone: A Novel</h2>
-                    <div class="book-author"> by <span>Benjamin Stevenson</span></div>
-                    <div class="book-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>4.0 (33)</span>
-                     </div>
-                     <div class="book-price">
-                        <p class="availability">Availability: <span>in stock</span></p>
-                        <p class="actual-price">Price: <span>$29.90</span></p>
-                     </div>
-                    
-                     <div class="book-detail">
-                        <h2>Overview</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque blanditiis quod dolores. Culpa asperiores rerum dolor ut in at magnam sapiente pariatur beatae esse dolorem animi, delectus est. Nobis, ipsum.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, voluptates?</p>
-                        <ul>
-                            <li><span>ISBN:</span> 9780316568920</li>
-                            <li><span>Publisher:</span> Little, Brown and Company</li>
-                            <li><span>Publication date:</span> 10/03/2023</li>
-                            <li><span>Edition description:</span> B&N Exclusive Edition</li>
-                            <li><span>Pages:</span> 384</li>
-                            <li><span>Sales rank:</span> 2</li>
-                            <li><span>Product dimensions:</span> 6.50(w) x 1.50(h) x 9.50(d)</li>
-                        </ul>
-                    </div>
-                    <div class="purchase-section">
-                        <input type="number" min="1" value="1">
-                        <button type="button" class="btn">Add to cart <i class="fas fa-shopping-cart"></i></button>
-                        <button type="button" class="btn">Add to favourites <i class="fas fa-heart"></i></button>
+            </div>
+            <div class="row" id="swiper-container">
+                <div class="swiper review-slider">
+                    <div class="swiper-wrapper" id="swiper-wrapper">`;
+                        <div class="swiper-slide slide-review" th:each="review:${reviews}">
+                            <div class="box-container">
+                                <div class="box">
+                                    <img src="../img/avatar.png" alt="user_pic" />
+                                    <h3 th:text="${review.login}"></h3>
+                                    <div class="stars">
+                                        <i class="fas fa-star" th:each="i:${#numbers.sequence(1,__${review.rating}__)}"></i>
+                                    </div>
+                                    <p th:text="${review.content}"></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="post-review" id="post-review">
+                <div class="row-review">
+                    <div class="image-review">
+                        <img src="../img/books.png" alt="" />
+                        <img src="../img/stand.png" alt="" />
+                    </div>
+                    <form th:action="@{'/api/add-reviews/'+${book.id}}" method="POST" th:object="${review}" id="review-form" sec:authorize="isAuthenticated()">
+                        <div class="inputBox">
+                            <input type="text" name="username" id="username_input" th:field="*{login}" placeholder="Nazwa użytkownika" maxlength="15" required />
+                            <input type="email" name="email" id="email_input" th:field="*{email}" placeholder="E-mail" required />
+                        </div>
+                        <div class="inputBox">
+                            <div class="container-rating">
+                                <div class="star-widget">
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-5" value="5" />
+                                    <label for="rate-5" class="fas fa-star"></label>
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-4" value="4" />
+                                    <label for="rate-4" class="fas fa-star"></label>
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-3" value="3" />
+                                    <label for="rate-3" class="fas fa-star"></label>
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-2" value="2" />
+                                    <label for="rate-2" class="fas fa-star"></label>
+                                    <input type="radio" th:field="*{rating}" name="rating" id="rate-1" value="1" checked />
+                                    <label for="rate-1" class="fas fa-star"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea maxlength="90" th:field="*{content}" placeholder="Wyraź swoją opinię na temat książki" name="content" id="content_input" cols="10" rows="2" required></textarea>
+                        <input type="submit" value="Opublikuj" class="show-menu" id="submit_input" />
+                    </form>
+                </div>
+            </div>
         </div>
-
     </section>
 
     <script type="module" src="/js/script.js"></script>

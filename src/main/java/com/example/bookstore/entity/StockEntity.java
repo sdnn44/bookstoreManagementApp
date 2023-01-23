@@ -1,24 +1,22 @@
 package com.example.bookstore.entity;
 
 
-import lombok.*;
+import com.example.bookstore.model.Book;
+import com.example.bookstore.model.Stock;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "stocks", schema = "public")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-
 public class StockEntity {
     @Id
     @Column(name = "stock_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "quantity")
     private Integer quantity;
@@ -29,5 +27,9 @@ public class StockEntity {
     public StockEntity(Integer quantity, boolean isAvailable) {
         this.quantity = quantity;
         this.isAvailable = isAvailable;
+    }
+
+    public static StockEntity fromStock(Stock stock) {
+        return new StockEntity(stock.getQuantity(), stock.isAvailable());
     }
 }

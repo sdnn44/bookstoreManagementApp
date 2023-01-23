@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,34 +8,13 @@
     <title>Online Bookstore Website Page</title>
 
     <link rel="stylesheet" th:href="@{~/css/main-page-style.css}">
+    <link rel="stylesheet" th:href="@{~/css/details-page-style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <a href="#" class="logo"> <i class="fas fa-book"></i> Bookstore </a>
-
-            <form action="" class="search-form">
-                <input type="search" name="" placeholder="Search for specific book.." id="search-box">
-                <label for="search-box" class="fa fa-search"></label>
-            </form>
-            <div class="icons">
-                <div id="search-btn" class="fas fa-search"></div>
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <div id="login-btn" class="fas fa-user"></div>
-            </div>
-        </div>
-        <div class="header-navbar">
-            <nav class="navbar">
-                <a href="#">Home</a>
-                <a href="#recommended">Recommended books</a>
-                <a href="#home">Reviews</a>
-                <a href="#home">Login</a>
-            </nav>
-        </div>
-    </header>
+    <header th:insert="/fragment/header.html :: header"></header>
 
     <section class="recommended" id="recommended">
         <h1 class="heading">
@@ -42,11 +22,18 @@
         </h1>
         <div class="swiper recommended-slider">
             <div class="swiper-wrapper">
-                <!-- 1 -->
                 <div th:each="book:${books}" class="swiper-slide box">
                     <div class="icons">
-                        <a th:href="@{'/book-details?bookId='+${book.id}}" class="fas fa-eye"></a>
-                        <a href="#" class="fas fa-heart"></a>
+                        <a th:href="@{'/book-details/'+${book.id}}" class="fas fa-eye"></a>
+                        <a th:href="@{'/books/'+${book.id}+'/addToFav'}"
+                           class="fas fa-heart"
+                           th:classappend="${book.favourite ? 'fav' : ''}"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${!book.favourite}"></a>
+                        <a th:href="@{'/books/'+${book.id}+'/removeFromFav'}"
+                           class="fas fa-heart fav"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${book.favourite}"></a>
                     </div>
                     <div class="image">
                         <img th:src="@{'~/img/'+${book.id}+'.jpg'}" alt="book_1" srcset="">
@@ -58,70 +45,6 @@
                         <a href="#" class="btn">Add to cart</a>
                     </div>
                 </div>
-                <!-- 2 -->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="../static/img/1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; 3 &ndash;&gt;-->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="/../resources/./static/./img/./1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; 4 &ndash;&gt;-->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="/static/img/./1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; 5 &ndash;&gt;-->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="/static/img/./1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>

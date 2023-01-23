@@ -20,7 +20,6 @@ VALUES ('Mariner Books', 'June 01, 2003', 400, 'Hardcover', 'English');
 INSERT INTO publishers(publisher_name, publish_date, pages, book_type, book_language)
 VALUES ('Signet Book', 'July 01, 1950', 336, 'Mass Market Paperbound', 'English');
 
-
 -- 1
 INSERT INTO books(stock_id, publisher_id, book_title, book_author, book_price, book_category, book_isbn, book_description)
 VALUES (1, 1, 'London Rules', 'Mick Herron', 20.00, 'Thriller', 9781399803083, 'London Rules might not be written down, but everyone knows rule one.
@@ -49,3 +48,39 @@ Rejected by such eminent publishing figures as Victor Gollancz, Jonathan Cape an
 INSERT INTO books(stock_id, publisher_id, book_title, book_author, book_price, book_category, book_isbn, book_description)
 VALUES (5, 5, '1984', 'George Orwell', 14.00, 'Fiction', 9781784876593, 'The year is 1984 and war and revolution have left the world unrecognisable. Great Britain, now known as Airstrip One, is ruled by the Party, led by Big Brother. Mass surveillance is everything and The Thought Police are employed to ensure that no individual thinking is allowed. Winston Smith works at The Ministry of Truth, carefully rewriting history, but he dreams of freedom and of rebellion. It is here that he meets and falls in love with Julia. They start a secret, forbidden affair – but nothing can be kept secret, and they are forced to face consequences more terrifying than either of them could have ever imagined.');
 
+insert into ROLES(ROLE_NAME)
+values ('ADMIN'), ('USER');
+
+insert into USERS(USERNAME, PASSWORD, ROLE_ID)
+values ('admin', '$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i', 1),
+       ('user', '$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i', 2);
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (1, 5, 'Great book', 'login@gmail.com', 'nickname');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (1, 1, 'Boring', 'mark@gmail.com', 'markiee');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (1, 3, 'Not a big fan', 'jonas@gmail.com', 'jonte');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (2, 5, 'Wow', 'hamishw@gmail.com', 'Hamish');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (3, 5, 'Nice', 'pete@gmail.com', 'Peter');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (4, 5, 'Great book', 'albert@gmail.com', 'Alberto');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (3, 2, 'Incredible book', 'hubert@gmail.com', 'Huberto');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (1, 4, 'Qualified Book', 'victo@gmail.com', 'Victor');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (5, 2, 'Fine', 'timothy@gmail.com', 'Tim');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (2, 3, 'Wow', 'paulo@gmail.com', 'Paul');

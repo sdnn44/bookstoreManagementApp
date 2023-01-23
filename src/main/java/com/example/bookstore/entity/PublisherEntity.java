@@ -1,25 +1,23 @@
 package com.example.bookstore.entity;
 
 
-import lombok.*;
+import com.example.bookstore.model.Publisher;
+import com.example.bookstore.model.Stock;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "publishers", schema = "public")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-
-
 public class PublisherEntity {
+
     @Id
     @Column(name = "publisher_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(name = "publisher_name")
     private String publisherName;
@@ -42,5 +40,9 @@ public class PublisherEntity {
         this.pages = pages;
         this.bookType = bookType;
         this.bookLanguage = bookLanguage;
+    }
+
+    public static PublisherEntity fromPublisher(Publisher publisher) {
+        return new PublisherEntity(publisher.getPublisherName(), publisher.getPublishDate(), publisher.getPages(), publisher.getBookType(), publisher.getBookLanguage());
     }
 }
