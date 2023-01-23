@@ -53,7 +53,7 @@ values ('ADMIN'), ('USER');
 
 insert into USERS(USERNAME, PASSWORD, ROLE_ID)
 values ('admin', '$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i', 1),
-        ('user', '$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i', 2);
+       ('user', '$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i', 2);
 
 INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
 VALUES (1, 5, 'Great book', 'login@gmail.com', 'nickname');
@@ -65,6 +65,13 @@ INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
 VALUES (1, 3, 'Not a big fan', 'jonas@gmail.com', 'jonte');
 
 INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (2, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (3, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (4, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
 VALUES (5, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
-
-
