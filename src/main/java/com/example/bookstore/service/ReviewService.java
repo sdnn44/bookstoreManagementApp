@@ -44,7 +44,6 @@ public class ReviewService {
     }
 
     public boolean addReview(Review review, int bookId) {
-        // validation
         review.setBookId((long) bookId);
         ReviewEntity reviewEntity = new ReviewEntity(review);
         reviewRepository.save(reviewEntity);

@@ -36,7 +36,7 @@ public class ReviewRestController {
     }
 
     @PostMapping("/add-reviews/{bookId}")
-    public String saveReview(Review review, int bookId) {
+    public String saveReview(Review review, @PathVariable int bookId) {
         return reviewService.addReview(review, bookId) ? "redirect:/book-details/" + bookId + "#review" : "main-page.html";
     }
 

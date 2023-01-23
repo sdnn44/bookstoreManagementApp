@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +30,8 @@ public class BookDetailsController {
             return "error.html";
         }
         List<Review> allReviewsForSpecificBook = reviewService.getAllReviewsByBookId(specificBook.getId());
-        double averageRating = reviewService.calculateAverageBookRating(specificBook.getId());
+        BigDecimal averageRating = BigDecimal.valueOf(reviewService.calculateAverageBookRating(specificBook.getId()))
+                .setScale(2, RoundingMode.HALF_UP);
         model.addAttribute("book", specificBook);
         model.addAttribute("reviews", allReviewsForSpecificBook);
         model.addAttribute("rating", averageRating);

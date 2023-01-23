@@ -22,7 +22,6 @@
         </h1>
         <div class="swiper recommended-slider">
             <div class="swiper-wrapper">
-                <!-- 1 -->
                 <div th:each="book:${books}" class="swiper-slide box">
                     <div class="icons">
                         <a th:href="@{'/book-details/'+${book.id}}" class="fas fa-eye"></a>
@@ -46,70 +45,6 @@
                         <a href="#" class="btn">Add to cart</a>
                     </div>
                 </div>
-                <!-- 2 -->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="../static/img/1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; 3 &ndash;&gt;-->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="/../resources/./static/./img/./1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; 4 &ndash;&gt;-->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="/static/img/./1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; 5 &ndash;&gt;-->
-<!--                <div class="swiper-slide box">-->
-<!--                    <div class="icons">-->
-<!--                        <a href="#" class="fas fa-eye"></a>-->
-<!--                        <a href="#" class="fas fa-heart"></a>-->
-<!--                    </div>-->
-<!--                    <div class="image">-->
-<!--                        <img src="/static/img/./1.jpg" alt="book_1" srcset="">-->
-<!--                    </div>-->
-<!--                    <div class="content">-->
-<!--                        <h3>London rules</h3>-->
-<!--                        <h4>Mick Herron</h4>-->
-<!--                        <div class="price">$15.99</div>-->
-<!--                        <a href="#" class="btn">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>

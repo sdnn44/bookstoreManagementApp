@@ -25,6 +25,7 @@
         <div class="swiper-wrapper">
             <div th:each="book:${favourites}" class="swiper-slide box">
                 <div class="icons">
+                    <a th:href="@{'/book-details/'+${book.id}}" class="fas fa-eye"></a>
                     <a th:href="@{'/books/'+${book.id}+'/removeFromFav'}" class="fas fa-heart fav"></a>
                 </div>
                 <div class="image">
