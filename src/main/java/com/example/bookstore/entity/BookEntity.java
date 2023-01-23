@@ -1,11 +1,14 @@
 package com.example.bookstore.entity;
 
+import com.example.bookstore.model.Book;
+import com.example.bookstore.model.Stock;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "books", schema = "public")
@@ -58,5 +61,9 @@ public class BookEntity {
         this.bookIsbn = bookIsbn;
         this.bookDescription = bookDescription;
         this.reviews = reviews;
+    }
+
+    public static BookEntity fromBook(Book book) {
+        return new BookEntity(StockEntity.fromStock(book.getStock()), PublisherEntity.fromPublisher(book.getPublisher()), book.getBookTitle(), book.getBookAuthor(), book.getPrice(), book.getBookCategory(), book.getISBN(), book.getDescription(), book.getReviews().stream().map(ReviewEntity::fromReview).collect(Collectors.toList()));
     }
 }

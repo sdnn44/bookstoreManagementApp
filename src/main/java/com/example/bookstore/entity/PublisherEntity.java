@@ -1,6 +1,8 @@
 package com.example.bookstore.entity;
 
 
+import com.example.bookstore.model.Publisher;
+import com.example.bookstore.model.Stock;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -38,5 +40,9 @@ public class PublisherEntity {
         this.pages = pages;
         this.bookType = bookType;
         this.bookLanguage = bookLanguage;
+    }
+
+    public static PublisherEntity fromPublisher(Publisher publisher) {
+        return new PublisherEntity(publisher.getPublisherName(), publisher.getPublishDate(), publisher.getPages(), publisher.getBookType(), publisher.getBookLanguage());
     }
 }

@@ -25,7 +25,7 @@ public class BookService {
     }
 
     public Optional<Book> getBookById(Long id) {
-        return getBookEntityById(id).map(Book::fromEntity);
+        return bookRepository.findById(id).map(Book::fromEntity);
     }
 
     public Optional<BookEntity> getBookEntityById(Long id) {

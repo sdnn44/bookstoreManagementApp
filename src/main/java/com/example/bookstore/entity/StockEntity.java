@@ -1,6 +1,8 @@
 package com.example.bookstore.entity;
 
 
+import com.example.bookstore.model.Book;
+import com.example.bookstore.model.Stock;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,5 +27,9 @@ public class StockEntity {
     public StockEntity(Integer quantity, boolean isAvailable) {
         this.quantity = quantity;
         this.isAvailable = isAvailable;
+    }
+
+    public static StockEntity fromStock(Stock stock) {
+        return new StockEntity(stock.getQuantity(), stock.isAvailable());
     }
 }

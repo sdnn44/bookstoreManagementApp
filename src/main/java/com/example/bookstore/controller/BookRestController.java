@@ -36,7 +36,7 @@ public class BookRestController {
     @GetMapping("/{bookId}/addToFav")
     public String addToFavourites(@PathVariable int bookId, Principal principal) {
         Optional<UserEntity> user = userService.getUserByUsername(principal.getName());
-        Optional<BookEntity> book = bookService.getBookEntityById((long) bookId);
+        Optional<BookEntity> book = bookService.getBookById((long) bookId).map(BookEntity::fromBook);
         user.ifPresent(userEntity -> userService.ee(userEntity.getId(), bookId));
 //        if (user.isPresent() && book.isPresent()) {
 //            userService.addToFavourites(user.get(), book.get());

@@ -1,6 +1,7 @@
 package com.example.bookstore.entity;
 
 import com.example.bookstore.model.Review;
+import com.example.bookstore.model.Stock;
 import lombok.*;
 
 import javax.persistence.*;
@@ -46,5 +47,9 @@ public class ReviewEntity {
         this.content = review.getContent();
         this.email = review.getEmail();
         this.login = review.getLogin();
+    }
+
+    public static ReviewEntity fromReview(Review review) {
+        return new ReviewEntity(review.getBookId(), review.getRating(), review.getContent(), review.getEmail(), review.getLogin());
     }
 }

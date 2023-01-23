@@ -36,4 +36,10 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private List<BookEntity> favouriteBooks = new ArrayList<>();
+
+    public UserEntity(String username, String password, RoleEntity role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }
