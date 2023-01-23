@@ -20,10 +20,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-//    public void addToFavourites(UserEntity user, BookEntity book) {
-//        user.getFavouriteBooks().add(book);
-//    }
-
     public Optional<UserEntity> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }

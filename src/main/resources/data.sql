@@ -65,6 +65,15 @@ INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
 VALUES (1, 3, 'Not a big fan', 'jonas@gmail.com', 'jonte');
 
 INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (2, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (3, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
+VALUES (4, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
+
+INSERT INTO reviews(book_id, rating, review_content, review_email, review_login)
 VALUES (5, 5, 'Wow', 'mikkel@gmail.com', 'whereisjessicahyde');
 
 
