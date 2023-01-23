@@ -279,3 +279,16 @@ body {
     color: #fff !important;
     background: var(--dark-color);
 }
+
+.center {
+    text-align: center;
+}
+
+.fav {
+    color: #27ae60 !important;
+    background-color: white;
+}
+
+.fav:hover{
+    background-color: white !important;
+}

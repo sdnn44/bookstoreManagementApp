@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +26,15 @@
                 <div th:each="book:${books}" class="swiper-slide box">
                     <div class="icons">
                         <a th:href="@{'/book-details/'+${book.id}}" class="fas fa-eye"></a>
-                        <a th:href="@{'/books/'+${book.id}+'/addToFav'}" class="fas fa-heart"></a>
+                        <a th:href="@{'/books/'+${book.id}+'/addToFav'}"
+                           class="fas fa-heart"
+                           th:classappend="${book.favourite ? 'fav' : ''}"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${!book.favourite}"></a>
+                        <a th:href="@{'/books/'+${book.id}+'/removeFromFav'}"
+                           class="fas fa-heart fav"
+                           sec:authorize="isAuthenticated()"
+                           th:if="${book.favourite}"></a>
                     </div>
                     <div class="image">
                         <img th:src="@{'~/img/'+${book.id}+'.jpg'}" alt="book_1" srcset="">

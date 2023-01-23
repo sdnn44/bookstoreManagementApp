@@ -14,7 +14,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-.login-btn {
+.btn {
   background-color: #27ae60;
   color: white;
   padding: 14px 20px;
@@ -24,6 +24,6 @@ input[type=text], input[type=password] {
   width: 100%;
 }
 
-.login-btn:hover {
+.btn:hover {
   opacity: 0.8;
 }
