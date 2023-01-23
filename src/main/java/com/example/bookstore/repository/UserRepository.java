@@ -17,4 +17,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Modifying
     @Query(value = "insert into FAVOURITE_BOOKS (user_id, book_id) values (:userId, :bookId)", nativeQuery = true)
     void addToFavourites(@Param("userId") Long userId, @Param("bookId") Long bookId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from FAVOURITE_BOOKS where user_id = :userId and book_id = :bookId", nativeQuery = true)
+    void removeFromFav(@Param("userId") Long userId, @Param("bookId") Long bookId);
 }

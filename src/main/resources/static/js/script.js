@@ -17,7 +17,7 @@ window.onload = () => {
 };
 
 var swiper = new Swiper(".recommended-slider", {
-  loop: true,
+  loop: false,
   grabCursor: true,
   centeredSlides: true,
   autoplay: {

@@ -100,7 +100,7 @@
                         <img src="../img/books.png" alt="" />
                         <img src="../img/stand.png" alt="" />
                     </div>
-                    <form th:action="@{/add-reviews/+${book.id}}" method="POST" th:object="${review}" id="review-form" sec:authorize="isAuthenticated()">
+                    <form th:action="@{'/add-reviews/'+${book.id}}" method="POST" th:object="${review}" id="review-form" sec:authorize="isAuthenticated()">
                         <div class="inputBox">
                             <input type="text" name="username" id="username_input" th:field="*{login}" placeholder="Nazwa użytkownika" maxlength="15" required />
                             <input type="email" name="email" id="email_input" th:field="*{email}" placeholder="E-mail" required />

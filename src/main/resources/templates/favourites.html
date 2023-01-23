@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore Website Page</title>
+
+    <link rel="stylesheet" th:href="@{~/css/main-page-style.css}">
+    <link rel="stylesheet" th:href="@{~/css/details-page-style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+
+</head>
+<body>
+<header th:insert="/fragment/header.html :: header"></header>
+
+<section class="recommended" id="recommended">
+    <h1 class="heading">
+        <span>Favourite books</span>
+    </h1>
+
+    <div class="swiper recommended-slider" sec:authorize="isAuthenticated()" th:if="${!emptyBooks}">
+        <div class="swiper-wrapper">
+            <div th:each="book:${favourites}" class="swiper-slide box">
+                <div class="icons">
+                    <a th:href="@{'/books/'+${book.id}+'/removeFromFav'}" class="fas fa-heart fav"></a>
+                </div>
+                <div class="image">
+                    <img th:src="@{'~/img/'+${book.id}+'.jpg'}" alt="book_1" srcset="">
+                </div>
+                <div class="content">
+                    <h3 th:text="${book.bookTitle}"></h3>
+                    <h4 th:text="${book.bookAuthor}"></h4>
+                    <div th:text="${#numbers.formatDecimal(book.price, 0, 'COMMA', 2, 'POINT')}+' zł'"
+                         class="price"></div>
+                    <a href="#" class="btn">Add to cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div style="margin-top: 5rem;"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" th:if="${emptyBooks}" class="center">
+        <h3>Go to books and add your first book!</h3>
+        <a href="/">
+            <button class="btn">Search</button>
+        </a>
+    </div>
+
+    <div sec:authorize="isAnonymous()" class="center">
+        <h3>You are not logged in</h3>
+        <h3>Please login first in order to add favourite books</h3>
+        <a href="/login">
+            <button class="btn">Login</button>
+        </a>
+    </div>
+</section>
+
+<script type="module" src="/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</body>
+</html>

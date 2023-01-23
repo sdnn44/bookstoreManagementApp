@@ -1,6 +1,5 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.entity.BookEntity;
 import com.example.bookstore.entity.UserEntity;
 import com.example.bookstore.model.Book;
 import com.example.bookstore.service.BookService;
@@ -9,9 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,13 +36,28 @@ public class BookRestController {
     }
 
     @GetMapping("/{bookId}/addToFav")
-    public String addToFavourites(@PathVariable int bookId, Principal principal) {
+    public RedirectView addToFavourites(@PathVariable int bookId, Principal principal) {
         Optional<UserEntity> user = userService.getUserByUsername(principal.getName());
-        Optional<BookEntity> book = bookService.getBookEntityById((long) bookId);
-        user.ifPresent(userEntity -> userService.ee(userEntity.getId(), bookId));
-//        if (user.isPresent() && book.isPresent()) {
-//            userService.addToFavourites(user.get(), book.get());
-//        }
-        return "main-page.html";
+        user.ifPresent(userEntity -> userService.addToFavourites(userEntity.getId(), bookId));
+        return new RedirectView("/");
+    }
+
+    @GetMapping("/{bookId}/removeFromFav")
+    public RedirectView removeFromFav(@PathVariable int bookId, Principal principal) {
+        Optional<UserEntity> user = userService.getUserByUsername(principal.getName());
+        user.ifPresent(userEntity -> userService.removeFromFavourites(userEntity.getId(), bookId));
+        return new RedirectView("/");
+    }
+
+    @GetMapping("/favourites")
+    public String getFavouriteBooks(Model model, Principal principal) {
+        List<Book> favouriteBooks = new ArrayList<>();
+        if (principal != null) {
+            favouriteBooks = bookService.getFavouriteBooksFor(principal.getName());
+        }
+        model.addAttribute("favourites", favouriteBooks);
+        model.addAttribute("emptyBooks", favouriteBooks.isEmpty());
+
+        return "favourites.html";
     }
 }

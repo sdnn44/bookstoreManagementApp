@@ -20,15 +20,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
-//    public void addToFavourites(UserEntity user, BookEntity book) {
-//        user.getFavouriteBooks().add(book);
-//    }
-
     public Optional<UserEntity> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public void ee(Long userId, int bookId) {
+    public void addToFavourites(Long userId, int bookId) {
         userRepository.addToFavourites(userId, (long) bookId);
+    }
+
+    public void removeFromFavourites(Long userId, int bookId) {
+        userRepository.removeFromFav(userId, (long) bookId);
     }
 }

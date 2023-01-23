@@ -4,7 +4,7 @@ drop table if exists books cascade;
 drop table if exists ROLES cascade;
 drop table if exists USERS cascade;
 drop table if exists reviews cascade;
-drop table if exists FAVOURITE cascade;
+drop table if exists FAVOURITE_BOOKS cascade;
 
 CREATE TABLE IF NOT EXISTS stocks
 (

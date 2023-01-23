@@ -12,13 +12,14 @@
         <div class="icons">
             <div id="search-btn" class="fas fa-search"></div>
             <a href="#" class="fas fa-shopping-cart"></a>
-            <div id="login-btn" class="fas fa-user"></div>
+            <div id="btn" class="fas fa-user"></div>
         </div>
     </div>
     <div class="header-navbar">
         <nav class="navbar-items">
             <a href="/">Home</a>
             <a href="/#recommended">Recommended books</a>
+            <a href="/books/favourites">Favourites</a>
             <a href="/login" sec:authorize="isAnonymous()">Login</a>
             <a href="/logout" sec:authorize="isAuthenticated()">Logout</a>
         </nav>
