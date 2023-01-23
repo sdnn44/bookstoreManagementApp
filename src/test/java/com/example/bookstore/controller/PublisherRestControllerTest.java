@@ -1,7 +1,8 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.model.Stock;
-import com.example.bookstore.service.StockService;
+
+import com.example.bookstore.model.Publisher;
+import com.example.bookstore.service.PublisherService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,42 +16,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 @AutoConfigureJsonTesters
 @AutoConfigureMockMvc(addFilters = false)
-@WebMvcTest(StockRestController.class)
-class StockRestControllerTest {
+@WebMvcTest(controllers = {PublisherRestController.class})
+class PublisherRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    StockService stockService;
+    PublisherService publisherService;
 
     @Autowired
-    private JacksonTester<List<Stock>> jacksonStock;
+    private JacksonTester<List<Publisher>> jacksonPublisher;
 
     @Test
-    void shouldReturnAllStocks() throws Exception {
-        Mockito.when(stockService.getAllStocks()).thenReturn(List.of(
-           new Stock(0L, 10, true),
-           new Stock(1L, 0, false)
-        ));
-
-        //when
+    void shouldReturnAllPublishers() throws Exception {
+        Mockito.when(publisherService.getAllPublishers()).thenReturn(List.of(
+                new Publisher(1L, "Pub1", "Pub1", 200, "Pub1", "Pub1")
+                ));
         MockHttpServletResponse response = mockMvc.perform(
-                get("/api/stocks").accept(MediaType.APPLICATION_JSON))
+                get("/api/publishers").accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
-        //then
         Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         Assertions.assertThat(response.getContentAsString()).isEqualTo(
-                jacksonStock.write(List.of(
-                        new Stock(0L, 10, true),
-                        new Stock(1L, 0, false))).getJson());
+                jacksonPublisher.write(List.of(
+                        new Publisher(1L, "Pub1", "Pub1", 200, "Pub1", "Pub1")
+                )).getJson()
+        );
     }
 }

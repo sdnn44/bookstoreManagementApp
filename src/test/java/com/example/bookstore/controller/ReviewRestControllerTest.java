@@ -1,7 +1,8 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.model.Stock;
-import com.example.bookstore.service.StockService;
+import com.example.bookstore.model.Publisher;
+import com.example.bookstore.model.Review;
+import com.example.bookstore.service.ReviewService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -22,35 +23,29 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @AutoConfigureJsonTesters
 @AutoConfigureMockMvc(addFilters = false)
-@WebMvcTest(StockRestController.class)
-class StockRestControllerTest {
-
+@WebMvcTest(controllers = {ReviewRestController.class})
+class ReviewRestControllerTest {
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
-    StockService stockService;
-
+    ReviewService reviewService;
     @Autowired
-    private JacksonTester<List<Stock>> jacksonStock;
+    private JacksonTester<List<Review>> jacksonReview;
 
     @Test
-    void shouldReturnAllStocks() throws Exception {
-        Mockito.when(stockService.getAllStocks()).thenReturn(List.of(
-           new Stock(0L, 10, true),
-           new Stock(1L, 0, false)
+    void shouldReturnAllReviews() throws Exception {
+        Mockito.when(reviewService.getAllReviews()).thenReturn(List.of(
+                new Review(1L, 1L, 4, "Content", "email", "login")
         ));
-
-        //when
         MockHttpServletResponse response = mockMvc.perform(
-                get("/api/stocks").accept(MediaType.APPLICATION_JSON))
+                get("/api/reviews").accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
-        //then
         Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         Assertions.assertThat(response.getContentAsString()).isEqualTo(
-                jacksonStock.write(List.of(
-                        new Stock(0L, 10, true),
-                        new Stock(1L, 0, false))).getJson());
+                jacksonReview.write(List.of(
+                        new Review(1L, 1L, 4, "Content", "email", "login")
+                )).getJson()
+        );
     }
 }

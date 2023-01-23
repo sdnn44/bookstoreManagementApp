@@ -1,7 +1,10 @@
 package com.example.bookstore.controller;
 
-import com.example.bookstore.model.Stock;
-import com.example.bookstore.service.StockService;
+import com.example.bookstore.entity.RoleEntity;
+import com.example.bookstore.entity.UserEntity;
+import com.example.bookstore.model.Publisher;
+import com.example.bookstore.service.PublisherService;
+import com.example.bookstore.service.UserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -22,35 +25,32 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @AutoConfigureJsonTesters
 @AutoConfigureMockMvc(addFilters = false)
-@WebMvcTest(StockRestController.class)
-class StockRestControllerTest {
+@WebMvcTest(controllers = {UserRestController.class})
+public class UserRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    StockService stockService;
+    UserService userService;
 
     @Autowired
-    private JacksonTester<List<Stock>> jacksonStock;
+    private JacksonTester<List<UserEntity>> jacksonReview;
 
     @Test
-    void shouldReturnAllStocks() throws Exception {
-        Mockito.when(stockService.getAllStocks()).thenReturn(List.of(
-           new Stock(0L, 10, true),
-           new Stock(1L, 0, false)
+    void shouldReturnAllPublishers() throws Exception {
+        Mockito.when(userService.getAllUsers()).thenReturn(List.of(
+                new UserEntity("user", "$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i", new RoleEntity())
         ));
-
-        //when
         MockHttpServletResponse response = mockMvc.perform(
-                get("/api/stocks").accept(MediaType.APPLICATION_JSON))
+                get("/api/users").accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
-        //then
         Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
         Assertions.assertThat(response.getContentAsString()).isEqualTo(
-                jacksonStock.write(List.of(
-                        new Stock(0L, 10, true),
-                        new Stock(1L, 0, false))).getJson());
+                jacksonReview.write(List.of(
+                        new UserEntity("user", "$2a$10$nkzrCXmW3wi1o6SS/V9mG.OJcD9IqImGZNXXvSjnP.ksDHEUc3V0i", new RoleEntity())
+                )).getJson()
+        );
     }
 }
